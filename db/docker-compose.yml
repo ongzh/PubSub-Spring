@@ -1,0 +1,15 @@
+version: "3"
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=pubsub_demo
+
+    container_name: pubsub-demo-db

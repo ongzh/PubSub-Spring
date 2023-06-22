@@ -1,6 +1,8 @@
 package com.pubsubdemo.inventory.model;
 
+import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -19,10 +21,11 @@ public class ProductStock {
 
     
     @Id
-    private String id;
+    @GeneratedValue
+    private Long id;
 
     @OneToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
     
     private int quantity;

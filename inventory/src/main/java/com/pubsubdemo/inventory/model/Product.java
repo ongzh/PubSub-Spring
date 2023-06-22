@@ -1,5 +1,7 @@
 package com.pubsubdemo.inventory.model;
+import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -13,15 +15,14 @@ import lombok.NoArgsConstructor;
 @Table(name = "product")
 public class Product {
 
-    @Id 
-    private String id;
+    @Id
+    @GeneratedValue
+    private Long id;
     private String name;
     private double price;
     private String imageUrl;
 
-    public Product(double price){
-        this.price = Math.floor(price*100)/100;
-    }
+   
 
     public void setPrice(double price){
         this.price = Math.floor(price*100)/100;

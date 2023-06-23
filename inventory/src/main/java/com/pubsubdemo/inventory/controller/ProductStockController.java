@@ -11,7 +11,7 @@ import com.pubsubdemo.inventory.model.ProductStock;
 import com.pubsubdemo.inventory.service.ProductStockService;
 
 @RestController
-@RequestMapping("/api/ProductStock")
+@RequestMapping("/inventory/productStock")
 public class ProductStockController {
 
     @Autowired

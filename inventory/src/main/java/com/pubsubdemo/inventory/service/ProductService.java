@@ -30,4 +30,14 @@ public class ProductService {
     public Product getProductById(Long productId) {
         return productRepository.findById(productId).orElse(null);
     }
+
+    public Product updateProductPrice(Long productId, double newPrice) {
+        Product product = productRepository.findById(productId).orElse(null);
+        if (product == null) {
+            throw new IllegalArgumentException("Product not found");
+        }
+        product.setPrice(newPrice);
+        return productRepository.save(product);
+        
+    }
 }

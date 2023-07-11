@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pubsubdemo.order.model.Order;
-import com.pubsubdemo.order.model.OrderItem;
-import com.pubsubdemo.order.model.OrderStatus;
 import com.pubsubdemo.order.repository.OrderRepository;
 
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 
 @Service
 public class OrderService {

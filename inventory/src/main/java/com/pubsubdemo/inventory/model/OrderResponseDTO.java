@@ -4,7 +4,9 @@ import lombok.Data;
 
 @Data
 public class OrderResponseDTO {
+    
     private long orderId;
-    private boolean orderSuccess;
+    private boolean isSuccessful;
+    private String message;
     
 }

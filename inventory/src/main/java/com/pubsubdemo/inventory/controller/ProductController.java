@@ -23,6 +23,8 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    
+
     @GetMapping("getAllProducts")
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products =  productService.getAllProducts();

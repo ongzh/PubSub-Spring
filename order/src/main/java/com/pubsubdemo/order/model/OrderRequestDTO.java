@@ -1,6 +1,5 @@
 package com.pubsubdemo.order.model;
 import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

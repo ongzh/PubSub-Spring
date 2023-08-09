@@ -29,14 +29,15 @@ public class OrderController {
 
   
 
-    @PostMapping("/createOrder")
-    public ResponseEntity<Order> createOrder(@RequestBody Order order){
+    @PostMapping("/placeOrder")
+    public ResponseEntity<Order> placeOrder(@RequestBody Order order){
 
-        orderService.createOrder(order);
+        orderService.placeOrder(order);
 
         return ResponseEntity.status(HttpStatus.OK).body(order);
 
     }
+    
 
 
 }

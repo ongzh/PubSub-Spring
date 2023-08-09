@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pubsubdemo.order.model.Order;
+import com.pubsubdemo.order.model.OrderItem;
 import com.pubsubdemo.order.model.OrderRequestDTO;
 import com.pubsubdemo.order.pubsub.PublisherConfiguration.OrderRequestGateway;
+import com.pubsubdemo.order.repository.OrderItemRepository;
 import com.pubsubdemo.order.repository.OrderRepository;
+import com.pubsubdemo.order.model.OrderStatus;
 
 import javax.transaction.Transactional;
 
@@ -23,12 +26,21 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     @Autowired
+    private OrderItemRepository orderItemRepository;
+    
+    @Autowired
     private OrderRequestGateway orderRequestGateway;
 
     @Transactional
-    public Order createOrder(Order order){
-        
-        return orderRepository.save(order);
+    private Order createOrder(Order order){
+        Order createdOrder = orderRepository.save(order);
+        for (OrderItem orderItem: createdOrder.getOrderItems()){
+            orderItem.setOrder(order);
+
+        }
+        orderItemRepository.saveAll(createdOrder.getOrderItems());
+        logger.info("Order with id: " + createdOrder.getId()+ " created, Status: Pending");
+        return createdOrder;
     }
 
 
@@ -37,10 +49,10 @@ public class OrderService {
     }
 
     @Transactional
-    public void placeOrder(Order order) {
+    public Order placeOrder(Order order) {
         Order createdOrder = this.createOrder(order);
         orderRequestGateway.sendOrderRequest(new OrderRequestDTO(createdOrder.getId(), createdOrder.getOrderItemDTOs()));
-        return;
+        return createdOrder;
     }
     
 }

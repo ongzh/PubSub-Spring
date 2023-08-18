@@ -34,9 +34,10 @@ public class OrderService {
     @Transactional
     private Order createOrder(Order order){
         Order createdOrder = orderRepository.save(order);
+        createdOrder.setOrderStatus(OrderStatus.PENDING);
+
         for (OrderItem orderItem: createdOrder.getOrderItems()){
             orderItem.setOrder(order);
-
         }
         orderItemRepository.saveAll(createdOrder.getOrderItems());
         logger.info("Order with id: " + createdOrder.getId()+ " created, Status: Pending");
@@ -52,6 +53,7 @@ public class OrderService {
     public Order placeOrder(Order order) {
         Order createdOrder = this.createOrder(order);
         orderRequestGateway.sendOrderRequest(new OrderRequestDTO(createdOrder.getId(), createdOrder.getOrderItemDTOs()));
+        logger.info("sending order request to pubsub")
         return createdOrder;
     }
     

@@ -69,7 +69,7 @@ public class SubscriberConfiguration {
     void processOrderConfirmedResponse(@Payload OrderResponseDTO orderResponseDTO, @Header(GcpPubSubHeaders.ORIGINAL_MESSAGE) BasicAcknowledgeablePubsubMessage message
     ){
         logger.info("Message Arrived, Order Confirmed: " + orderResponseDTO);
-        //orderService.processOrderConfirmed(orderResponseDTO);
+        orderService.processOrderConfirmed(orderResponseDTO);
         message.ack();
     }
 
@@ -78,7 +78,7 @@ public class SubscriberConfiguration {
     BasicAcknowledgeablePubsubMessage message
     ){
         logger.info("Message Arrived, Order Confirmed: " + orderResponseDTO);
-        //orderService.processOrderFailed(orderResponseDTO);
+        orderService.processOrderFailed(orderResponseDTO);
         message.ack();
     }
 

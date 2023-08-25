@@ -24,7 +24,7 @@ import com.pubsubdemo.order.service.OrderService;
 
 @Configuration
 public class SubscriberConfiguration {
-    private static final Log logger = LogFactory.getLog(SubscriberConfiguration.class)
+    private static final Log logger = LogFactory.getLog(SubscriberConfiguration.class);
 
     @Autowired
     OrderService orderService;
